@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import { Home, Login, Tracking } from './src/screens';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Stack = createNativeStackNavigator();
+
+const App = () => (
+  <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            title: "My Box",
+            headerTintColor: "#333",
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              alignSelf: 'center'
+            },
+            headerStyle: {
+              backgroundColor: '#f58634',
+            },
+          }} />
+
+        <Stack.Screen name="Tracking" component={Tracking} options={{headerShown:false}} />
+        <Stack.Screen name="Login" component={Login} options={{headerShown:false}} />
+
+        {/*<Stack.Screen name="RestrictedArea" component={RestrictedArea} />*/}
+      </Stack.Navigator>
+    </NavigationContainer>
+);
+
+export default App;
