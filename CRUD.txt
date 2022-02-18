@@ -1,0 +1,33 @@
+app.get('/create', async function (req, res) {
+    let create = await user.create({
+      name: "Guilherme",
+      password: "12345678",
+      cretedAt: new Date(),
+      updatedAt: new Date()
+    });
+    res.send("Usuario criado com sucesso!");
+  })
+
+app.get('/read', async (req, res) => {
+    let read = await user.findAll({
+      raw:true
+    })
+    console.log(read)
+})
+
+app.get('/update', async (req, res) => {
+    let update = user.update(
+      { name: "Doe" },
+      { where: { id: 1}
+    });
+    res.send('Pagina de update em users')
+})
+
+app.get('/delete', async (req, res) => {
+  let destroy = await user.destroy({
+    where: {
+      name: "John"
+    }
+  })
+  res.send('Pagina de delete')
+})

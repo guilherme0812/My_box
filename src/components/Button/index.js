@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 
 
 const Button = (props) => (
-    <View style={[styles.paddingButton]}>
-        <Text style={styles.text}> Ir para a tela de {props.tela} </Text>
-    </View>
+    <TouchableOpacity style={[styles.button, styles.paddingButton]} >
+        <Text style={styles.text}> {props.text} </Text>
+    </TouchableOpacity>
 );
 export default Button;

@@ -2,8 +2,10 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { Home, Login, Tracking } from './src/screens';
+import { Home, Login, Tracking} from './src/screens';
+import RestrictedArea from './src/screens/RestrictedArea'
 
 const Stack = createNativeStackNavigator();
 
@@ -23,14 +25,14 @@ const App = () => (
             headerStyle: {
               backgroundColor: '#f58634',
             },
-          }} />
+        }} />
 
         <Stack.Screen name="Tracking" component={Tracking} options={{headerShown:false}} />
         <Stack.Screen name="Login" component={Login} options={{headerShown:false}} />
 
-        {/*<Stack.Screen name="RestrictedArea" component={RestrictedArea} />*/}
+        <Stack.Screen name="RestrictedArea" component={RestrictedArea} options={{headerShown:false}} />
       </Stack.Navigator>
-    </NavigationContainer>
+  </NavigationContainer>
 );
 
 export default App;

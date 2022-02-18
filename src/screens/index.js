@@ -1,7 +1,8 @@
 import Home from './Home';
 import Login from './Login';
 import Tracking from './Tracking';
-import RestrictedArea from './RestrictedArea';
+import Profile from './Profile';
+import Register from './Register';
+import Edit from './Edit';
 
-
-export { Home, Login, Tracking, RestrictedArea }
+export { Home, Login, Tracking, Profile, Register, Edit }
