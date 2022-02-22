@@ -13,6 +13,7 @@ const Profile = ({navigation}) => {
     const [senhaAntiga, setSenhaAntiga] = useState(null)
     const [novaSenha, setNovaSenha] = useState(null)
     const [confNovaSenha,setConfNovaSenha] = useState(null)
+    const [msg,setMsg] = useState(null)
 
     //Pegar id do usuário
     useEffect(()=>{
@@ -40,7 +41,7 @@ const Profile = ({navigation}) => {
             })
         })
         let json = await response.json()
-        console.log(json)
+        setMsg(json)
     }
     
     return(
@@ -48,7 +49,8 @@ const Profile = ({navigation}) => {
             <MenuAreaRestrita title='Sair' navigation={navigation} />
 
             <View style={styles.container}>
-                <View style={styles.login__form}>
+                <View style={styles.width}>
+                    <Text> {msg} </Text>
                     <Text style={[styles.title, styles.title__form]}>Alterar Senha</Text>
 
                     <TextInput style={styles.inputGray} placeholder={'Senha antiga'} onChangeText={(text)=>setSenhaAntiga(text)} />

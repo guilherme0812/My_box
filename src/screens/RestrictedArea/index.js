@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Text, View } from 'react-native';
+import { Text, View,  BackHandler, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './style';
 import { Profile, Register, Edit } from '../';
 
-const RestrictedArea = () => {
+const RestrictedArea = ({navigation}) => {
     const Tab = createMaterialBottomTabNavigator();
     
     const [user,setUser] = useState(null)
@@ -21,16 +21,34 @@ const RestrictedArea = () => {
         getuser()
     })
 
+    useEffect(() => {
+        const backAction = () => {
+          Alert.alert("Ops!", "Voce quer voltar a tela de login?", [
+            {
+              text: "Cancel",
+              onPress: () => null,
+              style: "CANCELAR"
+            },
+            { text: "SIM", onPress: () => {
+                navigation.navigate('Home')
+            }}
+          ]);
+          return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener(
+          "hardwareBackPress",
+          backAction
+        );
+    
+        return () => backHandler.remove();
+      }, []);
+
     return(
         <Tab.Navigator
             activeColor='#fff'
             inactiveColor='#ffc093'
             barStyle={styles.bar}
-            tabBarOptions={{
-                activeTintColor: 'red',
-                inactiveTintColor: 'green',
-                
-            }}
         >
             <Tab.Screen
                 name="Profile"

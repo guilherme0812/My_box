@@ -35,14 +35,15 @@ const Login = ({navigation}) => {
 
     // Função de biometria
     async function biometric() {
+        //Verifica se o dispositivo tem compatibilidade com biometria
         let compatible = await LocalAuthentication.hasHardwareAsync()
         if ( compatible ) {
+            // verifica se há biometria cadastrada
             let biometricRecords = await LocalAuthentication.isEnrolledAsync()
             if (!biometricRecords) {
                 alert('Biometria não cadastrada')
             } else {
                 let result = await LocalAuthentication.authenticateAsync()
-                console.log('teste')
 
                 // Se a biometria estiver correta
                 if(result.success) {

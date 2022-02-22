@@ -25,13 +25,40 @@ app.post('/login', async (req, res) => {
 
 app.post('/verifyPass', async (req, res) => {
   let response = await user.findOne({
-    where: {id: req.body.id, password: req.body.senhaAntiga}
+    where: {id: req.body.id, password:req.body.senhaAntiga}
   })
   if (response === null) {
-    res.send(JSON.stringify('Senha antiga incorreta'))
+    res.send(JSON.stringify("A senha antiga não confere."))
   } else {
-    res.send(response);
+     // Verificar se as senhas foram digitadas iguais
+     if (req.body.novaSenha === req.body.confNovaSenha) {
+       // Atualizando password no banco de dados
+       response.password = req.body.novaSenha
+       response.save()
+       res.send(JSON.stringify('Senha atualizada com sucesso!'))
+     } else {
+       res.send(JSON.stringify('As senhas nãp conferem'))
+     }
   }
+})
+
+// Cadastrar produto no banco de dados
+app.post('/create', async (req, res) => {
+    let trackingId = ''
+    let create = await tracking.create({
+      code: req.body.code,
+      local: req.body.local, 
+      userId: req.body.userId,
+      createdAt: new Date(), 
+      updatedAt: new Date()
+   }).then( (response)=>{
+     trackingId += response.id
+   })
+
+   await product.create({
+     trackingId: trackingId,
+     name: req.body.product
+   })
 })
 
 let port = process.env.PORT || 3000;
