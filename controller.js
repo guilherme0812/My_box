@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const models = require('./models');
 const QRCode = require('qrcode')
+const routes = require('./routes/routes')
 
 const app = express();
 app.use(cors());
@@ -16,7 +17,7 @@ let user = models.User;
 let tracking = models.Tracking;
 let product = models.Product;
 
-
+app.use('', routes)
 app.post('/login', async (req, res) => {
   let response = await user.findOne({
     where: { name: req.body.name, password: req.body.password }

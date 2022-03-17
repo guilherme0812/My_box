@@ -31,7 +31,8 @@
     "react-native-web": "0.17.1",
     "sequelize": "^6.14.1",
     "expo-sharing": "~10.1.0",
-    "expo-file-system": "~13.1.4"
+    "expo-file-system": "~13.1.4",
+    "expo-barcode-scanner": "~11.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
